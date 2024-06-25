@@ -6,7 +6,7 @@ import { useWeather } from "./context/WeatherContextProvider"
 
 function App() {
   const weather=useWeather();
-  const [img,setImg]=useState('')
+  const [img,setImg]=useState('https://cdn.pixabay.com/photo/2016/11/22/21/39/dark-1850684_1280.jpg')
   const message=weather?.data?.current.condition.text.toLowerCase()
 
   const changeBg=useCallback(()=>{
@@ -41,10 +41,10 @@ function App() {
           style={{backgroundImage:`url(${img})`,backgroundSize:"cover",backgroundPosition:"center"}}>
             <Banner/>
             <div className="w-full h-1/2 grid grid-cols-2 gap-4 p-4 mb-8">
-              <Card title='Feels like' logo="fa-solid fa-temperature-empty" val={weather?.data?.current?.feelslike_c} unit="&deg;"/>
-              <Card title="Humidity" logo="fa-solid fa-droplet" val={weather?.data?.current?.humidity} unit="%"/>
-              <Card title="UV index" logo="fa-regular fa-sun" val={weather?.data?.current?.uv} unit=" units"/>
-              <Card title="Heat index" logo="fa-solid fa-fire" val={weather?.data?.current?.heatindex_c} unit="&deg;"/>
+              <Card title='Feels like' logo="fa-solid fa-temperature-empty" val={weather?.data?.current?.feelslike_c||"32.6"} unit="&deg;"/>
+              <Card title="Humidity" logo="fa-solid fa-droplet" val={weather?.data?.current?.humidity||72} unit="%"/>
+              <Card title="UV index" logo="fa-regular fa-sun" val={weather?.data?.current?.uv||6} unit=" units"/>
+              <Card title="Heat index" logo="fa-solid fa-fire" val={(weather?.data?.current?.heatindex_c)||(32.6)} unit="&deg;"/>
             </div>
           </div>
         </div>
